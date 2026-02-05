@@ -112,7 +112,8 @@
             const left = parseFloat(leftText);
             const right = parseFloat(rightText);
             var error = false
-            if (Number.isNaN(left) || Number.isNaN(right)){
+            var over= false
+            if (Number.isNaN(left) || Number.isNaN(right) || left<0 || right <0){
                 error = true
             }
             if (middle == "+"){
@@ -122,17 +123,30 @@
             }else if(middle == "*"){
                 total = left*right;
             }else if(middle == "/"){
+                if(right ==0){
+                    over = true
+                }
                 total = left/right;
             }else if(middle == "%"){
+                if(right ==0){
+                    over = true
+                }
                 total = left%right;
             }
             
             if(error){
-                alert("Invalid Input!");
+                alert("Error :(");
+            }else if(over){
+                console.log("It’s over 9000!")
+                alert("It’s over 9000!");
             }else{
+                console.log(total)
                 alert(total);
             }
         })
+        setInterval(() => {
+            alert("Please, use me...");
+        }, 30000);
         
     </script>
 </body>
