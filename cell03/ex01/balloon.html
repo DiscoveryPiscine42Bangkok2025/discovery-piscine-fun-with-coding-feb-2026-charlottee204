@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        margin: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 90vh;
+    }
+    .ball{
+        background-color: red;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        transition: width 0.2s ease,height 0.2s ease;
+    }
+</style>
+<body>
+    <div class="ball" id="ball"></div>
+    <script>
+        color = ["green","blue","red"];
+        var index = 0;
+        var size = 200
+        var ball = document.getElementById("ball");
+        ball.addEventListener("click",()=>{
+            ball.style.background = color[index]
+            index = (index+1)%3
+            size += 10
+            if (size > 420) {
+                size = 200
+                ball.style.height = `${size}px`
+                ball.style.width = `${size}px`
+            }else{
+                ball.style.height = `${size}px`
+                ball.style.width = `${size}px`
+            }
+        })
+        ball.addEventListener("mouseleave",()=>{
+            index = (index+1)%3
+            ball.style.background = color[index]
+            size -= 5
+            if (size < 200) {
+                size = 200 
+            }
+            ball.style.height = `${size}px`
+            ball.style.width = `${size}px`
+        })
+    </script>
+</body>
+</html>
