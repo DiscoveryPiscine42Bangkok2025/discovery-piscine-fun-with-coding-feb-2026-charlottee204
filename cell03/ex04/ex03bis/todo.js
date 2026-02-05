@@ -1,0 +1,74 @@
+$(function () {
+  const $button = $("#button");
+  const $ft_list = $("#ft_list");
+
+  $button.on("click", function () {
+    const text = prompt("Enter a new TO DO:");
+    if (!text || text.trim() === "") return;
+
+    createTodoDiv(text.trim(), true);
+  });
+
+  // ---------------- cookie ----------------
+  function setCookie(name, value, days) {
+    const d = new Date();
+    d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
+    document.cookie =
+      name + "=" + encodeURIComponent(value) +
+      ";expires=" + d.toUTCString() +
+      ";path=/";
+  }
+
+  function getCookie(name) {
+    const key = name + "=";
+    const parts = document.cookie.split("; ");
+    for (const p of parts) {
+      if (p.startsWith(key)) return decodeURIComponent(p.substring(key.length));
+    }
+    return null;
+  }
+
+  // ---------------- save/load ----------------
+  function saveTodos() {
+    const todos = $ft_list.children().map(function () {
+      return $(this).text();
+    }).get();
+
+    setCookie("todo_list", JSON.stringify(todos), 30);
+  }
+
+  function createTodoDiv(text, shouldSave = true) {
+    const $div = $("<div></div>").text(text);
+
+    $div.on("click", function () {
+      if (confirm("Do you want to remove this TO DO?")) {
+        $(this).remove();
+        saveTodos();
+      }
+    });
+
+    $ft_list.prepend($div);
+
+    if (shouldSave) saveTodos();
+  }
+
+  function loadTodos() {
+    const raw = getCookie("todo_list");
+    if (!raw) return;
+
+    let todos;
+    try {
+      todos = JSON.parse(raw);
+    } catch {
+      return;
+    }
+
+    $ft_list.empty();
+
+    for (let i = todos.length - 1; i >= 0; i--) {
+      createTodoDiv(todos[i], false);
+    }
+  }
+
+  loadTodos();
+});

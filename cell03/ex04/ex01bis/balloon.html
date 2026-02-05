@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+
+  <style>
+    body{
+      margin: 0px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 90vh;
+    }
+    .ball{
+      background-color: red;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      transition: width 0.2s ease, height 0.2s ease;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="ball" id="ball"></div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+  <script>
+    $(function () {
+      const color = ["green", "blue", "red"];
+      let index = 0;
+      let size = 200;
+
+      const $ball = $("#ball");
+
+      $ball.on("click", function () {
+        $ball.css("background", color[index]);
+        index = (index + 1) % 3;
+
+        size += 10;
+
+        if (size > 420) {
+          size = 200;
+        }
+
+        $ball.css({
+          width: size + "px",
+          height: size + "px"
+        });
+      });
+
+      $ball.on("mouseleave", function () {
+        index = (index + 1) % 3;
+        $ball.css("background", color[index]);
+
+        size -= 5;
+        if (size < 200) {
+          size = 200;
+        }
+
+        $ball.css({
+          width: size + "px",
+          height: size + "px"
+        });
+      });
+    });
+  </script>
+</body>
+</html>

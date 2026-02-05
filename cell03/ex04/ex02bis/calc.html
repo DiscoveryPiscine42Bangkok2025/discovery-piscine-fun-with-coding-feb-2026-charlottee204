@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<style>
+  body{
+    margin: 0px;
+    background-color: rgb(143, 124, 218);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  h1{
+    font-size: 50px;
+    text-align: center;
+    color: azure;
+    text-shadow: 3px 2px black ;
+  }
+  .main{
+    width: 80%;
+    height: 600px;
+    background-color: rgb(240, 229, 178);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .calc{
+    width: 95%;
+    height: 350px;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .button{
+    width: 40%;
+    height: 100px;
+    background-color: rgb(239, 139, 139);
+    border-radius: 10px;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .text{
+    font-size: 30px;
+    font-weight: 700;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .box{
+    width: 360px;
+    height: 320px;
+    background-color: rgba(239, 139, 139, 0.733);
+    margin: 30px;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #left, #right, #middle{
+    background: none;
+    width: 300px;
+    height: 300px;
+    border-radius: 30px;
+    font-size: 40px;
+  }
+  #middle{
+    color: rgb(112, 106, 106);
+  }
+  #middle option{
+    font-size: 20px;
+  }
+</style>
+
+<body>
+  <h1>Calculator Online</h1>
+  <div class="main">
+    <div class="calc">
+      <div class="box left">
+        <input type="text" id="left" placeholder="ใส่ตัวเลข...">
+      </div>
+      <div class="box middle">
+        <select id="middle">
+          <option value="" selected disabled>เลือกเครื่องหมาย</option>
+          <option value="+">+</option>
+          <option value="-">-</option>
+          <option value="*">*</option>
+          <option value="/">/</option>
+          <option value="%">%</option>
+        </select>
+      </div>
+      <div class="box right">
+        <input type="text" id="right" placeholder="ใส่ตัวเลข...">
+      </div>
+    </div>
+    <div class="button" id="button">
+      <div class="text">Try Me!</div>
+    </div>
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+  <script>
+    $(function () {
+      $("#button").on("click", function () {
+        const rightText = $("#right").val();
+        const leftText  = $("#left").val();
+        const middle    = $("#middle").val();
+
+        const left  = parseFloat(leftText);
+        const right = parseFloat(rightText);
+
+        let error = false;
+        let over = false;
+        let total;
+
+        if (Number.isNaN(left) || Number.isNaN(right) || left < 0 || right < 0) {
+          error = true;
+        }
+
+        if (middle === "+") {
+          total = left + right;
+        } else if (middle === "-") {
+          total = left - right;
+        } else if (middle === "*") {
+          total = left * right;
+        } else if (middle === "/") {
+          if (right === 0) over = true;
+          total = left / right;
+        } else if (middle === "%") {
+          if (right === 0) over = true;
+          total = left % right;
+        }
+
+        if (error) {
+          alert("Error :(");
+        } else if (over) {
+          console.log("It’s over 9000!");
+          alert("It’s over 9000!");
+        } else {
+          console.log(total);
+          alert(total);
+        }
+      });
+
+      setInterval(function () {
+        alert("Please, use me...");
+      }, 30000);
+    });
+  </script>
+</body>
+</html>
