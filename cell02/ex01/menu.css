@@ -1,0 +1,66 @@
+#napbar{
+    background-color: tomato;
+    height: 90px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#left{
+    display: flex;
+    padding: 20px;
+    align-items: center;
+
+}
+#right{
+    display: flex;
+    padding: 20px;
+    align-items: center;
+
+}
+body{
+    background-color: blanchedalmond;
+    margin: 0px;
+}
+.button{
+    background-color: rgba(255, 99, 71, 0); /* tomato จางๆ */
+    height: 70px;
+    width: 200px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    font-size: 25px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 500;
+}
+
+.button:hover{
+    background-color: rgba(71, 10, 10, 0.3);
+}
+.dropmain{
+    position: relative;
+    padding: 20px;
+}
+.dropdown{
+    
+    display : none;
+    position: absolute;  
+    background-color: aliceblue; 
+    border-radius: 8px;
+}
+
+.dropdown a{
+    min-width:180px;
+    border-radius: 8px;
+    display: block;
+    padding: 12px 26px;
+    margin:10px;
+    text-decoration: none;
+}
+
+.dropdown a:hover{
+    background-color: rgb(0, 13, 24,0.3);
+}
+.dropmain:hover .dropdown{
+    display: block;
+}
